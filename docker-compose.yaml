@@ -1,0 +1,21 @@
+services:
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    volumes:
+      - .:/code
+    command:
+      - /bin/sh
+      - -c
+      - python main.py start
+  
+networks:
+  default:
+    name: 'crm'
+    external: True
